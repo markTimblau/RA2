@@ -4,7 +4,7 @@ public class Futbolista extends Thread{
     private int ngols = 0;
     private final int ntirades = 20;
 
-    private final int NUM_JUGADORS = 11;
+    private static final int NUM_JUGADORS = 11;
     private final double PROBABILITAT = 0.5;
 
     public Futbolista(String name){
@@ -13,7 +13,7 @@ public class Futbolista extends Thread{
     @Override
     public void run(){
         for (int i = 0; i <= ntirades; i++){
-            if (Math.random() > PROBABILITAT){
+            if (Math.random() >= PROBABILITAT){
                 ngols++;
             }
 
@@ -22,7 +22,7 @@ public class Futbolista extends Thread{
     public static void main(String[] args ) throws InterruptedException {
         //CREEM LOS FUTBOLISTES
         String[] futbolistas = {"Pique", "Messi","Suárez","Neymar","Busquets","Xavi","Iniesta","Villa","Alves","Valdes","Mascherano"};
-        Futbolista[] jugadores = new Futbolista[futbolistas.length];
+        Futbolista[] jugadores = new Futbolista[NUM_JUGADORS];
     
         System.out.println("Inici dels chuts----------");
         //DEFINIMOS Y ARRANCAMOS LOS HILOS
