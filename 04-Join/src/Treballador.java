@@ -45,6 +45,6 @@ public class Treballador extends Thread {
             }
             this.edat_inici_treball++;
         }
-        System.out.printf("%s -> edat: %d / total: %6.2f \n", this.getName(), this.edat_actual, this.cobrat);
+        //System.out.printf("%s -> edat: %d / total: %6.2f \n", this.getName(), this.edat_actual, this.cobrat);
     }
 }

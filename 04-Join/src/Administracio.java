@@ -9,7 +9,13 @@ public class Administracio {
             //INICIAMOS
             treballador[i].start();
             //LOS JUNTAMOS
-            treballador[i].join();
+            
+        }
+        for (Treballador aquest : treballador) {
+            aquest.join();
+        }
+        for (Treballador aquest : treballador) {
+            System.out.printf("%s -> edat: %d / total: %6.2f \n", aquest.getName(), aquest.getEdat(), aquest.getCobrat());
         }
     }
     public static void main(String[] args) throws InterruptedException{
