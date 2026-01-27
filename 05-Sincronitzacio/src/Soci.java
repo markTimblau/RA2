@@ -14,14 +14,16 @@ public class Soci extends Thread{
 
     @Override
     public void run(){
+        //RECOGEMOS EL OBJETO SIMPLETON COMPTE
+        Compte compte = Compte.getInstancia();
         //CICLO DE APORTACIONES Y EXPORTACIONES
         for (int i = 0; i < maxAnys; i++) {
             //CICLO DE 12 MESES
             for (int j = 0; j < 12; j++){
                 if (j%2 == 1){
-                    Compte.setSaldo(aportacio);
+                    compte.setSaldo(aportacio);
                 } else {
-                    Compte.setSaldo(-(aportacio));
+                    compte.setSaldo(-(aportacio));
                 }
             }
             try {

@@ -27,6 +27,6 @@ public class Associacio {
     }
     //MOSTRAMOS EL DINERO DE LA CUENTA
     public static void mostraBalancCompte(){
-        System.out.println("La compta té " + Compte.getSaldo() + " euros");        
+        System.out.println("La compta té " + Compte.getInstancia().getSaldo() + " euros");        
     }
 }

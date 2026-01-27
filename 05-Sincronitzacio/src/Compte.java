@@ -1,20 +1,19 @@
 public class Compte {
     private static Compte compte;
-    private static int saldo = 0;
+    private int saldo = 0;
 
-    private Compte() {
-        if (getInstancia() != null) {
-            throw new IllegalStateException("Ja existeix una instancia de Compte");
-        }
-    }
-    public static Compte getInstancia() {
+    private Compte() {}
+    //TOD0 NECESITA SYNCHRONIZED PARA QUE NO HAYAN ERRORES AL MODIFICAR EL SALDO
+    public static synchronized Compte getInstancia() {
         if (compte == null) {
             compte = new Compte();
         }
         return compte;
     }
-    public static void setSaldo(int diners){
+    public synchronized void setSaldo(int diners){
         saldo += diners;
     }
-    public static int getSaldo(){return saldo;}
+    public synchronized int getSaldo(){
+        return saldo;
+    }
 }
