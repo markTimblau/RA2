@@ -22,7 +22,7 @@ public class Esdeveniment extends Thread{
     }
 
     public synchronized void ferReserva(Assistent assistent){
-        while (ocupat) {
+        while (ocupat || placesDisponibles <= 0) {
             try {
                 wait();
             } catch (InterruptedException e) {
