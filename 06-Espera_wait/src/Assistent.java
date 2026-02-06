@@ -11,7 +11,7 @@ public class Assistent extends Thread{
     @Override
     public void run(){
         while (true) { 
-            if (rnd.nextInt(10) < 5){
+            if (rnd.nextInt(10) < 3){
                 esdeveniment.ferReserva(this);
             } else {
                 esdeveniment.cancelaReserva(this);
