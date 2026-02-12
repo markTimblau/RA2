@@ -26,7 +26,6 @@ public class Taula {
     }
     public static void showTaula(){
         for(int i = 0; i < nComensals; i++){
-            //ESTO CREO QUE YA NO FUNCIONA PORQUE FORQUILLA AHORA ES UN OBJETO
             System.out.printf("Comensal:%s esq:%d dreta:%d\n", 
             comensals[i].getName(),
             comensals[i].getForquillaEsquerra().getNumber(),

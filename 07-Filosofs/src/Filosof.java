@@ -18,14 +18,15 @@ public class Filosof extends Thread {
     public void menja() {
         // FORQUILLA ESQUERRA
         if (this.forquillaEsquerra.isInUs()) {
-            espera();
             this.hunger++;
-        } else {
-            this.forquillaEsquerra.setEnUs(true);
-            System.out.printf("Filòsof: %s agafa la forquilla esquerra %d \n",
-                    this.getName(),
-                    this.forquillaEsquerra.getNumber());
+            espera();
+            return;
         }
+        this.forquillaEsquerra.setEnUs(true);
+        System.out.printf("Filòsof: %s agafa la forquilla esquerra %d \n",
+        this.getName(),
+        this.forquillaEsquerra.getNumber());
+        
         // FORQUILLA DRETA
         if (this.forquillaDreta.isInUs()) {
             this.forquillaEsquerra.setEnUs(false);
@@ -33,17 +34,17 @@ public class Filosof extends Thread {
                     this.getName(),
                     this.forquillaEsquerra.getNumber());
             this.hunger++;
-            System.out.printf("Filòsof: %s gana= %d \n", 
-            this.getName(),
-            this.hunger);
-            espera();
-            ///////////////
-        } else {
-            this.forquillaDreta.setEnUs(true);
-            System.out.printf("Filòsof: %s agafa la forquilla dreta %d \n",
+            System.out.printf("Filòsof: %s gana=%d \n", 
                     this.getName(),
-                    this.forquillaDreta.getNumber());
+                    this.hunger);
+            espera();
+            return;
         }
+        this.forquillaDreta.setEnUs(true);
+        System.out.printf("Filòsof: %s agafa la forquilla dreta %d \n",
+                this.getName(),
+                this.forquillaDreta.getNumber());
+
         // ESTÁ MENJANT
         System.out.printf("Filòsof: %s menja \n",
                 this.getName());
@@ -52,13 +53,13 @@ public class Filosof extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // HA TERMINAT DE MENJAR
 
+        // HA TERMINAT DE MENJAR
         System.out.printf("Filòsof: %s ha acabat de menjar \n",
         this.getName());
         this.hunger = 0;
         this.forquillaEsquerra.setEnUs(false);
-        this.forquillaEsquerra.setEnUs(false);
+        this.forquillaDreta.setEnUs(false);
     }
 
     public void pensa() {
