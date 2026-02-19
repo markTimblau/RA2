@@ -23,12 +23,10 @@ public class Taula {
             
         }
         //LOS JUNTAMOS TODOS 
-        for(int i = 0; i < nComensals; i++){
-            comensals[i].join();
-        }
+
         showTaula();
         cridarATaula();
-    }
+    }   
     public static void showTaula(){
         for(int i = 0; i < nComensals; i++){
             System.out.printf("Comensal:%s esq:%d dreta:%d\n", 
@@ -38,9 +36,12 @@ public class Taula {
         }
         System.out.println("-----------------------------");
     }
-    public static void cridarATaula(){
+    public static void cridarATaula() throws InterruptedException{
         for(int i = 0; i < nComensals; i++){
             comensals[i].start();
         }
+        for(int i = 0; i < nComensals; i++){
+            comensals[i].join();
+        } 
     }
 }

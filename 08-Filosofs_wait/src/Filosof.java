@@ -20,11 +20,7 @@ public class Filosof extends Thread {
         // ESTÁ MENJANT
         System.out.printf("Filòsof: %s menja \n",
                 this.getName());
-        try {
-            Thread.sleep(rnd.nextInt(1000) + 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        esperaMes();
 
         // HA TERMINAT DE MENJAR
         System.out.printf("Filòsof: %s ha acabat de menjar \n",
@@ -36,16 +32,20 @@ public class Filosof extends Thread {
     public void pensa() {
         System.out.printf("Filòsof: %s pensant \n",
         this.getName());
-        try {
-            Thread.sleep(rnd.nextInt(1000) + 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        esperaMes();
     }
 
     public void espera() {
         try {
             Thread.sleep(rnd.nextInt(500) + 500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void esperaMes() {
+        try {
+            Thread.sleep(rnd.nextInt(1000) + 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -60,45 +60,54 @@ public class Filosof extends Thread {
     }
 
     public boolean agafarForquilles() throws InterruptedException{
-        // FORQUILLA ESQUERRA
+        if(!agafarForquillaEsquerra()){
+            return false;
+        }
+        return agafarForquillaDreta();
+    }
+
+    public boolean agafarForquillaEsquerra() throws InterruptedException{
         if (this.forquillaEsquerra.getLliure() != -1) {
-        this.hunger++;
-        System.out.printf("Filòsof: %s gana=%d \n", 
+            this.hunger++;
+            System.out.printf("Filòsof: %s gana=%d \n", 
             this.getName(),
             this.hunger);
-        espera();
-        return false;  
+            deixarForquilles();
+            espera();
+            return false; 
         }
         this.forquillaEsquerra.agafar(num);
         System.out.printf("Filòsof: %s agafa la forquilla esquerra %d \n",
         this.getName(),
         this.forquillaEsquerra.getNumber());
-        
-        // FORQUILLA DRETA
+        return true;
+    }
+    
+     public boolean agafarForquillaDreta() throws InterruptedException{
         if (this.forquillaDreta.getLliure() != -1) {
-            deixarForquilles();
             System.out.printf("Filòsof: %s deixa l'esquerra (%d) i espera (dreta ocupada) \n",
                     this.getName(),
                     this.forquillaEsquerra.getNumber());
             this.hunger++;
             System.out.printf("Filòsof: %s gana=%d \n", 
-                    this.getName(),
-                    this.hunger);
+            this.getName(),
+            this.hunger);
+            deixarForquilles();
             espera();
-            return false;
+            return false; 
         }
         this.forquillaDreta.agafar(num);
         System.out.printf("Filòsof: %s agafa la forquilla dreta %d \n",
-            this.getName(),
-            this.forquillaDreta.getNumber());
+        this.getName(),
+        this.forquillaDreta.getNumber());
         return true;
-    }
+     }
 
-    public void deixarForquilles() throws InterruptedException{
+    public void deixarForquilles(){
         if(this.num == this.forquillaEsquerra.getLliure()){
             this.forquillaEsquerra.deixar();
         }
-        while(this.num == this.forquillaDreta.getLliure()){
+        if(this.num == this.forquillaDreta.getLliure()){
             this.forquillaDreta.deixar();
         }
     }
