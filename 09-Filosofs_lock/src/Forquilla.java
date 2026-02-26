@@ -16,13 +16,10 @@ public class Forquilla{
     public int getLliure() {return lliure;}
 
     public void agafar(int num) throws InterruptedException{
-        if (lliure == -1){
             bloqueig.lock();
             lliure = num;
-            
-        }
     }
-    public synchronized void deixar(){
+    public void deixar(){
         lliure = -1;
         bloqueig.unlock();
     }
