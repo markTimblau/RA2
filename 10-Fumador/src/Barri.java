@@ -2,12 +2,10 @@
 import java.util.ArrayList;
 
 public class Barri {
-    private Estanc estanc;
     private static ArrayList<Fumador> fumadors;
-    private int finished = 0;
     
     public static void main(String[] args) throws InterruptedException{
-        estanc = new Estanc();
+        Estanc estanc = new Estanc();
         fumadors = new ArrayList<>();
         for (int i = 0; i < 3; i++){
             fumadors.add(new Fumador(estanc, i));
@@ -25,8 +23,5 @@ public class Barri {
 
         //CERRAR EL ESTANCO
         estanc.tencarEstanc();
-    }
-    public void fin(){
-        finished++;
     }
 }
