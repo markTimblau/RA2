@@ -1,24 +1,34 @@
-import java.util.Random;
 
 public class Barber extends Thread{
-    public Random rnd = new Random();
+    private Barberia barberia;
 
     public Barber(String name){
         super(name);
     }
 
+    public void setBarberia(Barberia barberia) {
+        this.barberia = barberia;
+    }
+
     @Override
     public void run() {
-
-        //REVISA SI HAY CLIENTES
         while(true){
-
-            //CONSIGUE UN CLIENTE
-            System.out.printf("Li toca al client s% ", client.getName());
-            System.out.printf("Tallant cabell a client s% ", client.getName());
-            //CORTAMOS EL PELO
-            Thread.sleep(rnd.nextInt(900) + 100);
+            try {
+                // CONSIGUE UN CLIENTE DE LA BARBERIA
+                Client client = barberia.seguentClient();
+                if (client != null) {
+                    client.tallaseElCabell();
+                    
+                } else {
+                    // NO HAY CLIENTES, DUERME
+                    System.out.printf("Barber %s dormint\n", getName());
+                    synchronized (barberia.getCondBarber()) {
+                        barberia.getCondBarber().wait();
+                    }
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
-        
     }
 }
